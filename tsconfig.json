@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "strict": true,
+    "rootDir": "./"
+  },
+  "ts-node": {
+    "esm": true
+  }
+}
