@@ -1,9 +1,8 @@
 ﻿import Joi from "joi";
-import { Users } from "@prisma/client";
 
-export type SignUpData = Omit<Users, "id">;
+import { AuthData } from "../services/userService.js";
 
-const signUpSchema = Joi.object<SignUpData>({
+const authSchema = Joi.object<AuthData>({
   email: Joi.string().email().required().messages({
     "string.email": "⚠ Email must be a valid one...",
     "string.empty": "⚠ Email is required!",
@@ -15,4 +14,4 @@ const signUpSchema = Joi.object<SignUpData>({
   }),
 });
 
-export default signUpSchema;
+export default authSchema;
