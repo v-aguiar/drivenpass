@@ -1,8 +1,8 @@
 ﻿import { prisma } from "../config/db.js";
-import { SignUpData } from "../schemas/signUpSchema.js";
+import { AuthData } from "../services/userService.js";
 
 const userRepository = {
-  insert: async (data: SignUpData) => {
+  insert: async (data: AuthData) => {
     await prisma.users.create({
       data: { ...data },
     });
