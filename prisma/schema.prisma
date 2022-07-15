@@ -51,6 +51,7 @@ model Cards {
   cardNumber     String
   cardholderName String
   securityCode   String
+  cardPassword   String
   isVirtual      Boolean
   cardType       CardType
   label          String
