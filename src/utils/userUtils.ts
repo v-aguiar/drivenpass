@@ -3,6 +3,10 @@
 const JWT_KEY = process.env.JWT_SECRET || "JWT_KEY";
 const EXPIRATION_TIME = "1d";
 
+type DecodedTokenData = {
+  userId: string;
+};
+
 const userUtils = {
   generateToken: (userId: number) => {
     const token = jwt.sign({ userId }, JWT_KEY, { expiresIn: EXPIRATION_TIME });
@@ -10,7 +14,16 @@ const userUtils = {
   },
 
   verifyToken: (token: string) => {
-    return jwt.verify(token, JWT_KEY);
+    jwt.verify(token, JWT_KEY, (error, data) => {
+      if (error) {
+        throw {
+          name: "badRequest",
+          message: "⚠ Token expired!",
+        };
+      }
+    });
+
+    return jwt.decode(token) as DecodedTokenData;
   },
 };
 
