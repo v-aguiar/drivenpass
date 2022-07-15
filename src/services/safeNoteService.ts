@@ -53,6 +53,25 @@ const safeNoteService = {
 
     return safeNote;
   },
+
+  remove: async (userId: number, id: number) => {
+    const safeNote = await safeNoteRepository.getById(id);
+    if (!safeNote) {
+      throw {
+        name: "notFound",
+        message: "⚠ No safe note found with given id!",
+      };
+    }
+
+    if (safeNote.userId !== userId) {
+      throw {
+        name: "unauthorized",
+        message: "⚠ Safe note does not belong to the user!",
+      };
+    }
+
+    await safeNoteRepository.remove(id);
+  },
 };
 
 export default safeNoteService;
