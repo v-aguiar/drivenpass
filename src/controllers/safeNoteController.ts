@@ -20,3 +20,12 @@ export async function search(req: Request, res: Response) {
 
   res.status(200).send(safeNotes);
 }
+
+export async function searchById(req: Request, res: Response) {
+  const { id } = req.params;
+  const { userId } = res.locals;
+
+  const safeNote = await safeNoteService.searchById(userId, Number(id));
+
+  res.status(200).send(safeNote);
+}

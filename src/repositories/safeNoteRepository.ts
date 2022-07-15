@@ -7,12 +7,16 @@ const safeNoteRepository = {
     await prisma.safeNotes.create({ data: { ...createSafeNoteData } });
   },
 
-  getByTitleAndUserId: async (title: string, userId: number) => {
-    return await prisma.safeNotes.findFirst({ where: { title, userId } });
+  getById: async (id: number) => {
+    return await prisma.safeNotes.findUnique({ where: { id } });
   },
 
   getByUserId: async (userId: number) => {
     return await prisma.safeNotes.findMany({ where: { userId } });
+  },
+
+  getByTitleAndUserId: async (title: string, userId: number) => {
+    return await prisma.safeNotes.findFirst({ where: { title, userId } });
   },
 };
 
