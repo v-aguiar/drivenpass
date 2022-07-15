@@ -6,6 +6,16 @@ const credentialRepository = {
     await prisma.credentials.create({ data: createCredentialData });
   },
 
+  getById: async (id: number) => {
+    return await prisma.credentials.findUnique({ where: { id } });
+  },
+
+  getByUserId: async (userId: number) => {
+    return await prisma.credentials.findMany({
+      where: { userId },
+    });
+  },
+
   getByLabelAndUserId: async (label: string, userId: number) => {
     return await prisma.credentials.findFirst({ where: { label, userId } });
   },

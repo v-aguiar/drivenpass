@@ -9,3 +9,11 @@ export async function insert(req: Request, res: Response) {
 
   res.sendStatus(201);
 }
+
+export async function search(req: Request, res: Response) {
+  const { userId } = res.locals;
+
+  const credentials = await credentialService.search(userId);
+
+  res.status(200).send(credentials);
+}

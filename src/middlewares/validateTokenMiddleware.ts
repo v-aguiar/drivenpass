@@ -29,7 +29,7 @@ export async function validateTokenMiddleware(req: Request, res: Response, next:
     };
   }
 
-  res.locals.user = user;
+  res.locals.userId = userId;
 
   next();
 }
