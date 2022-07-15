@@ -19,6 +19,10 @@ const credentialRepository = {
   getByLabelAndUserId: async (label: string, userId: number) => {
     return await prisma.credentials.findFirst({ where: { label, userId } });
   },
+
+  remove: async (id: number) => {
+    await prisma.credentials.delete({ where: { id } });
+  },
 };
 
 export default credentialRepository;

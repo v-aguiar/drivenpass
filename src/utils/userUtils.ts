@@ -17,7 +17,7 @@ const userUtils = {
     jwt.verify(token, JWT_KEY, (error, data) => {
       if (error) {
         throw {
-          name: "badRequest",
+          name: "expiredToken",
           message: "⚠ Token expired!",
         };
       }
