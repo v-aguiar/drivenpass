@@ -9,7 +9,7 @@ const operationalUtils = {
     return cryptr.decrypt(hash) === data;
   },
 
-  decyptHash: (hash: string) => {
+  decryptHash: (hash: string) => {
     return cryptr.decrypt(hash);
   },
 };
