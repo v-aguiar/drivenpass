@@ -61,6 +61,8 @@ const credentialService = {
       };
     }
 
+    credential.password = operationalUtils.decryptHash(credential.password);
+
     return credential;
   },
 };
