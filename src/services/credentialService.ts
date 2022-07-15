@@ -65,6 +65,25 @@ const credentialService = {
 
     return credential;
   },
+
+  remove: async (id: number, userId: number) => {
+    const credential = await credentialRepository.getById(id);
+    if (!credential) {
+      throw {
+        name: "notFound",
+        message: "⚠ No credential found with given id!",
+      };
+    }
+
+    if (credential.userId !== userId) {
+      throw {
+        name: "unauthorized",
+        message: "⚠ Credential does not belong to the user!",
+      };
+    }
+
+    await credentialRepository.remove(id);
+  },
 };
 
 export default credentialService;

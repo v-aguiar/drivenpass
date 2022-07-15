@@ -26,3 +26,12 @@ export async function searchById(req: Request, res: Response) {
 
   res.status(200).send(credential);
 }
+
+export async function remove(req: Request, res: Response) {
+  const { id } = req.params;
+  const { userId } = res.locals;
+
+  await credentialService.remove(Number(id), userId);
+
+  res.status(200).send("✔ Credential removed!");
+}

@@ -31,6 +31,11 @@ export default function errorHandlerMiddleware(
     res.status(422).send(error.message);
   }
 
+  if (error.name === "expiredToken") {
+    console.error(error.message);
+    res.status(498).send(error.message);
+  }
+
   console.error("⚠ Something went wrong!: ", error);
   res.status(500).send("⚠ Something went wrong!");
 }
