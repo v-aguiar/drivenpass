@@ -18,6 +18,10 @@ const safeNoteRepository = {
   getByTitleAndUserId: async (title: string, userId: number) => {
     return await prisma.safeNotes.findFirst({ where: { title, userId } });
   },
+
+  remove: async (id: number) => {
+    await prisma.safeNotes.delete({ where: { id } });
+  },
 };
 
 export default safeNoteRepository;

@@ -1,6 +1,6 @@
 ﻿import { Router } from "express";
 
-import { create, search, searchById } from "../controllers/safeNoteController.js";
+import { create, search, searchById, remove } from "../controllers/safeNoteController.js";
 
 import { validateTokenMiddleware as validateToken } from "../middlewares/validateTokenMiddleware.js";
 import { validateSchemaMiddleware as validateSchema } from "../middlewares/validateSchemaMiddleware.js";
@@ -12,5 +12,7 @@ safeNoteRouter.post("/safe-notes", validateToken, validateSchema(createSafeNoteS
 
 safeNoteRouter.get("/safe-notes", validateToken, search);
 safeNoteRouter.get("/safe-notes/:id", validateToken, searchById);
+
+safeNoteRouter.delete("/safe-notes/:id", validateToken, remove);
 
 export default safeNoteRouter;
