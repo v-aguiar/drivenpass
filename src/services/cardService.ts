@@ -28,6 +28,37 @@ const cardService = {
 
     await cardRepository.create(createCardData);
   },
+
+  search: async (userId: number) => {
+    const cards = await cardRepository.getByUserId(userId);
+    if (!cards || cards.length === 0) {
+      throw {
+        name: "notFound",
+        message: "⚠ User does not have any registered card!",
+      };
+    }
+
+    return cards;
+  },
+
+  searchById: async (userId: number, id: number) => {
+    const card = await cardRepository.getById(id);
+    if (!card) {
+      throw {
+        name: "notFound",
+        message: "⚠ No card found with given id!",
+      };
+    }
+
+    if (card.userId !== userId) {
+      throw {
+        name: "unauthorized",
+        message: "⚠ Card does not belong to the user!",
+      };
+    }
+
+    return card;
+  },
 };
 
 export default cardService;
