@@ -20,3 +20,12 @@ export async function search(req: Request, res: Response) {
 
   res.status(200).send(cards);
 }
+
+export async function searchById(req: Request, res: Response) {
+  const { userId } = res.locals;
+  const { id } = req.params;
+
+  const card = await cardService.searchById(userId, Number(id));
+
+  res.status(200).send(card);
+}

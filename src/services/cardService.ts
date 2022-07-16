@@ -40,6 +40,25 @@ const cardService = {
 
     return cards;
   },
+
+  searchById: async (userId: number, id: number) => {
+    const card = await cardRepository.getById(id);
+    if (!card) {
+      throw {
+        name: "notFound",
+        message: "⚠ No card found with given id!",
+      };
+    }
+
+    if (card.userId !== userId) {
+      throw {
+        name: "unauthorized",
+        message: "⚠ Card does not belong to the user!",
+      };
+    }
+
+    return card;
+  },
 };
 
 export default cardService;
