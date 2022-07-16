@@ -29,3 +29,12 @@ export async function searchById(req: Request, res: Response) {
 
   res.status(200).send(card);
 }
+
+export async function remove(req: Request, res: Response) {
+  const { userId } = res.locals;
+  const { id } = req.params;
+
+  await cardService.remove(userId, Number(id));
+
+  res.status(200).send("✔ Removed!");
+}
