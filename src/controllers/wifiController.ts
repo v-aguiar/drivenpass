@@ -12,3 +12,11 @@ export async function create(req: Request, res: Response) {
 
   res.status(201).send("✔ Wifi network registered!");
 }
+
+export async function search(req: Request, res: Response) {
+  const { userId } = res.locals;
+
+  const wifiNetworks = await wifiService.search(userId);
+
+  res.status(200).send(wifiNetworks);
+}

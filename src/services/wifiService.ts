@@ -18,6 +18,18 @@ const wifiService = {
 
     await wifiRepository.create(createWifiData);
   },
+
+  search: async (userId: number) => {
+    const wifiNetworks = await wifiRepository.getByUserId(userId);
+    if (!wifiNetworks || wifiNetworks.length === 0) {
+      throw {
+        name: "notFound",
+        message: "⚠ User has no wifi networks registered!",
+      };
+    }
+
+    return wifiNetworks;
+  },
 };
 
 export default wifiService;
