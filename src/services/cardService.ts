@@ -28,6 +28,18 @@ const cardService = {
 
     await cardRepository.create(createCardData);
   },
+
+  search: async (userId: number) => {
+    const cards = await cardRepository.getByUserId(userId);
+    if (!cards || cards.length === 0) {
+      throw {
+        name: "notFound",
+        message: "⚠ User does not have any registered card!",
+      };
+    }
+
+    return cards;
+  },
 };
 
 export default cardService;
