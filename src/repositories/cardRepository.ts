@@ -21,6 +21,10 @@ const cardRepository = {
   getByLabelAndUserId: async (label: string, userId: number) => {
     return await prisma.cards.findFirst({ where: { label, userId } });
   },
+
+  remove: async (id: number) => {
+    await prisma.cards.delete({ where: { id } });
+  },
 };
 
 export default cardRepository;
