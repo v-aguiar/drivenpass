@@ -20,3 +20,12 @@ export async function search(req: Request, res: Response) {
 
   res.status(200).send(wifiNetworks);
 }
+
+export async function searchById(req: Request, res: Response) {
+  const { id } = req.params;
+  const { userId } = res.locals;
+
+  const wifiNetwork = await wifiService.searchById(userId, Number(id));
+
+  res.status(200).send(wifiNetwork);
+}
