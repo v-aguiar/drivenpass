@@ -1,6 +1,6 @@
 ﻿import { Router } from "express";
 
-import { create, search, searchById } from "../controllers/wifiController.js";
+import { create, search, searchById, remove } from "../controllers/wifiController.js";
 
 import { validateTokenMiddleware as validateToken } from "../middlewares/validateTokenMiddleware.js";
 import { validateSchemaMiddleware as validateSchema } from "../middlewares/validateSchemaMiddleware.js";
@@ -13,6 +13,6 @@ wifiRouter.post("/wifi", validateToken, validateSchema(createWifiSchema), create
 wifiRouter.get("/wifi", validateToken, search);
 wifiRouter.get("/wifi/:id", validateToken, searchById);
 
-// wifiRouter.delete("/wifi/:id", validateToken, remove);
+wifiRouter.delete("/wifi/:id", validateToken, remove);
 
 export default wifiRouter;

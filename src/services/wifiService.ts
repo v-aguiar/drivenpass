@@ -56,6 +56,25 @@ const wifiService = {
 
     return wifiNetwork;
   },
+
+  remove: async (userId: number, id: number) => {
+    const wifiNetwork = await wifiRepository.getById(id);
+    if (!wifiNetwork) {
+      throw {
+        name: "notFound",
+        message: "⚠ Wifi network not found!",
+      };
+    }
+
+    if (wifiNetwork.userId !== userId) {
+      throw {
+        name: "unauthorized",
+        message: "⚠ User not authorized to access this wifi network!",
+      };
+    }
+
+    await wifiRepository.remove(id);
+  },
 };
 
 export default wifiService;

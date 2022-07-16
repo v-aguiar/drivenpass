@@ -29,3 +29,12 @@ export async function searchById(req: Request, res: Response) {
 
   res.status(200).send(wifiNetwork);
 }
+
+export async function remove(req: Request, res: Response) {
+  const { id } = req.params;
+  const { userId } = res.locals;
+
+  await wifiService.remove(userId, Number(id));
+
+  res.status(200).send("✔ Wifi network removed!");
+}
