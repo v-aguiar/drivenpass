@@ -29,3 +29,12 @@ export async function searchById(req: Request, res: Response) {
 
   res.status(200).send(document);
 }
+
+export async function remove(req: Request, res: Response) {
+  const { userId } = res.locals;
+  const { id } = req.params;
+
+  await documentService.remove(userId, Number(id));
+
+  res.status(200).send("✔ Document removed!");
+}

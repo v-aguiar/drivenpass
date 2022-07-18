@@ -1,6 +1,6 @@
 ﻿import { Router } from "express";
 
-import { create, search, searchById } from "../controllers/documentController.js";
+import { create, search, searchById, remove } from "../controllers/documentController.js";
 
 import { validateTokenMiddleware as validateToken } from "../middlewares/validateTokenMiddleware.js";
 import { validateSchemaMiddleware as validateSchema } from "../middlewares/validateSchemaMiddleware.js";
@@ -13,6 +13,6 @@ documentRouter.post("/documents", validateToken, validateSchema(createDocumentSc
 documentRouter.get("/documents", validateToken, search);
 documentRouter.get("/documents/:id", validateToken, searchById);
 
-// documentRouter.delete("/documents/:id", validateToken, remove);
+documentRouter.delete("/documents/:id", validateToken, remove);
 
 export default documentRouter;
