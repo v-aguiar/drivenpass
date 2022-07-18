@@ -12,3 +12,20 @@ export async function create(req: Request, res: Response) {
 
   res.status(201).send("✔ Document created!");
 }
+
+export async function search(req: Request, res: Response) {
+  const { userId } = res.locals;
+
+  const documents = await documentService.search(userId);
+
+  res.status(200).send(documents);
+}
+
+export async function searchById(req: Request, res: Response) {
+  const { userId } = res.locals;
+  const { id } = req.params;
+
+  const document = await documentService.searchById(userId, Number(id));
+
+  res.status(200).send(document);
+}
