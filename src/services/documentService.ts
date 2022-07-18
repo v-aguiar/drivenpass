@@ -1,6 +1,7 @@
 ﻿import { Document } from "@prisma/client";
 
 import documentRepository from "../repositories/documentRepository.js";
+import userRepository from "../repositories/userRepository.js";
 
 export type CreateDocumentData = Omit<Document, "id">;
 
@@ -29,6 +30,33 @@ const documentService = {
     }
 
     return documents;
+  },
+
+  searchById: async (userId: number, id: number) => {
+    const document = await documentRepository.getById(id);
+    if (!document) {
+      throw {
+        name: "notFound",
+        message: "⚠ No document found with given id!",
+      };
+    }
+
+    const user = await userRepository.findById(userId);
+    if (!user) {
+      throw {
+        name: "notFound",
+        message: "⚠ No user found with given id!",
+      };
+    }
+
+    if (document.userId !== user.id) {
+      throw {
+        name: "unauthorized",
+        message: "⚠ Document does not belong to the user!",
+      };
+    }
+
+    return document;
   },
 };
 
