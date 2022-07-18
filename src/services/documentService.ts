@@ -18,6 +18,18 @@ const documentService = {
 
     await documentRepository.create(documentData);
   },
+
+  search: async (userId: number) => {
+    const documents = await documentRepository.getByUserId(userId);
+    if (!documents || documents.length === 0) {
+      throw {
+        name: "notFound",
+        message: "⚠ User does not have any registered document!",
+      };
+    }
+
+    return documents;
+  },
 };
 
 export default documentService;
