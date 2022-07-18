@@ -1,5 +1,4 @@
-﻿import { prisma } from "../config/db.js";
-import { Users } from "@prisma/client";
+﻿import { Users } from "@prisma/client";
 import bcrypt from "bcrypt";
 
 import userRepository from "../repositories/userRepository.js";
@@ -10,7 +9,7 @@ export type AuthData = Omit<Users, "id">;
 
 const userService = {
   signUp: async ({ email, password }: AuthData) => {
-    const user = await prisma.users.findUnique({ where: { email } });
+    const user = await userRepository.findByEmail(email);
     if (user) {
       throw {
         name: "alreadyExists",
