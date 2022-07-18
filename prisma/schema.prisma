@@ -20,6 +20,7 @@ model Users {
   SafeNotes    SafeNotes[]
   Cards        Cards[]
   WifiNetworks WifiNetworks[]
+  Document     Document[]
 }
 
 model Sessions {
@@ -68,8 +69,26 @@ model WifiNetworks {
   userId       Int
 }
 
+model Document {
+  id             Int          @id @default(autoincrement())
+  document       Users        @relation(fields: [userId], references: [id])
+  userId         Int
+  type           DocumentType
+  name           String
+  creationDate   String
+  expirationDate String
+  number         Int          @unique
+  issuingBody    String
+  label          String
+}
+
 enum CardType {
   credit
   debit
   both
+}
+
+enum DocumentType {
+  rg
+  cnh
 }
