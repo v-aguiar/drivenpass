@@ -5,14 +5,14 @@ async function main() {
 
   await prisma.users.upsert({
     where: {
-      email: EMAIL
+      email: EMAIL,
     },
     update: {},
     create: {
       email: EMAIL,
-      password: "senhadedezdigitos"
-    }
-  })
+      password: "senhadedezdigitos",
+    },
+  });
 }
 
 main()
@@ -20,6 +20,6 @@ main()
     console.error(e);
     process.exit(1);
   })
-  .finally(async () => {
-    await prisma.$disconnect;
-  })
+  .finally(() => {
+    prisma.$disconnect;
+  });
